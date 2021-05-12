@@ -1,6 +1,5 @@
 import reducers from '../reducers';
-import {applyMiddleware, createStore} from 'redux';
-import ReduxThunk from 'redux-thunk';
+import {createStore} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 
 import { persistStore, persistReducer } from 'redux-persist';
