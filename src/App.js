@@ -1,23 +1,28 @@
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
+import axios from 'axios';
 import './App.css';
+import CourseSection from './components/Course/CourseSection';
 
-function App() {
+const App = () => {
+  const [courseData, setCourseData] = useState({});
+
+  useEffect(() => {
+    axios.get(`https://api.ringleplus.com/api/v4/student/landing/course?locale=ko`)
+    .then(res => {
+      const data = res.data;
+      console.log(data);
+
+      setCourseData({
+        categories: data.landing_course_categories,
+        courses: data.landing_courses, //
+      })
+    })
+
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={{padding:40}}>
+      <CourseSection courseData={courseData}/>
     </div>
   );
 }
